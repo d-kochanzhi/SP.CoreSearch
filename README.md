@@ -1,15 +1,15 @@
 # SP.CoreSearch
 SharePoint postquery javascript engine
 
-- searching
-- sorting
-- filtering
-- rifiner results
-- paging results
+- searchg
+- sort
+- filter
+- refine
+- paging
 
 ## Dependencies
 
-* es6 Promise (or use [polyfill](https://github.com/stefanpenner/es6-promise))
+* es6 Promise (for old browsers use [polyfill](https://github.com/stefanpenner/es6-promise))
 
 ## Demo
 
