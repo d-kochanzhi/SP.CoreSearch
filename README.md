@@ -1,7 +1,7 @@
 # SP.CoreSearch
 SharePoint postquery javascript engine
 
-- searchg
+- search
 - sort
 - filter
 - refine
@@ -17,16 +17,16 @@ SharePoint postquery javascript engine
 
 ##### this working demo (fetching data, sorting, filtering, paging and refining) contains only 50 rows of unminimize js code
 
-## Demo source (with VueJs)
+## Demo source (using VueJs and bootstrap)
 
-### Include js to sharepoint page header
+### Add js to sharepoint page header
 
 ```html  
   <script src='<%= SPUtility.MakeBrowserCacheSafeLayoutsUrl("vue.js", false) %>'></script>
   <script src='<%= SPUtility.MakeBrowserCacheSafeLayoutsUrl("es6-promise.auto.min.js", false) %>'></script>
   <script src='<%= SPUtility.MakeBrowserCacheSafeLayoutsUrl("SP.CoreSearch.js", false) %>'></script>
 ```
-### add to page content
+### Add to page content
 
 ```html  
 
