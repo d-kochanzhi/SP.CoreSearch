@@ -133,9 +133,9 @@ SharePoint postquery javascript engine
 
 ```
 
-All you need is splist
+##### All you need is splist
 ![image](https://github.com/d-kochanzhi/SP.CoreSearch/raw/master/src/standart_list.png)
-And enable rifine property on field
+##### And enable rifine property on field
 ![image](https://github.com/d-kochanzhi/SP.CoreSearch/raw/master/src/managed_properties.png)
 
 ## SP.CoreSearch.Settings Properties
