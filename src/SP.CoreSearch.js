@@ -1,7 +1,7 @@
 /*
  Dmitry Kochanzhi
  https://github.com/d-kochanzhi
- SP.CoreSearch.SearchEngine.Instance.Request(new SP.CoreSearch.Settings());
+ https://t.me/midpc
  */
 (function () {
     'use strict';
@@ -172,11 +172,11 @@
                     Object.getOwnPropertyNames(headers).forEach(function (h) {
                         xhr.setRequestHeader(h, headers[h]);
                     });
-                xhr.responseType = 'json';
+                xhr.responseType = 'text';
 
                 xhr.onload = function () {
                     if (xhr.status == 200) {
-                        resolve(xhr.response);
+                        resolve(JSON.parse(xhr.response));
                     } else {
                         var error = new Error(xhr.statusText);
                         error.code = xhr.status;
@@ -208,11 +208,8 @@
                             self.__digest = data.d.GetContextWebInformation;
                             self.__digest.Date = new Date(new Date().getTime() + self.__digest.FormDigestTimeoutSeconds * 1000);
                             resolve(self.__digest);
-                        }, function (err) {
-                            if (window.console && console.log) {
-                                console.log(err);
-                            }
-                            reject();
+                        }, function (err) {                           
+                            reject(err);
                         });
                 }
             });
