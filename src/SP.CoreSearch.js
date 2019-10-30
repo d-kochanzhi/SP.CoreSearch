@@ -23,7 +23,7 @@
             this.Refiners = "";
             this.SourceId = "";
             this.RankingModelId = "";
-
+            this.Anonymous = false;
         }
         SP.CoreSearch.Settings.prototype.PrepareQuery = function () {
             var query = {
@@ -50,7 +50,8 @@
                 },
                 "Refiners": this.Refiners,
                 "SourceId": this.SourceId,
-                "RankingModelId": this.RankingModelId
+                "RankingModelId": this.RankingModelId,
+                "QueryTemplatePropertiesUrl": "spfile://webroot/queryparametertemplate.xml"
             };
 
             if (!this.SourceId)
@@ -58,6 +59,9 @@
 
             if (!this.RankingModelId)
                 delete query.RankingModelId;
+
+            if (!this.Anonymous)
+                delete query.QueryTemplatePropertiesUrl;
 
             return query;
         }
@@ -96,11 +100,11 @@
                         refStr += ",equals(\"{0}\")".format(i);
                 });
                 self.RefinementFilters.push("{0}:or(".format(item) + refStr.substring(1) + ")");
-            });      
+            });
 
             return this.__refiners;
         },
-        SP.CoreSearch.Settings.registerClass('SP.CoreSearch.Settings');
+            SP.CoreSearch.Settings.registerClass('SP.CoreSearch.Settings');
         SP.CoreSearch.Settings.Instance = new SP.CoreSearch.Settings();
 
         SP.CoreSearch.SearchEngine = function () {
@@ -143,7 +147,7 @@
                                     if (window.console && console.log) {
                                         console.log(err);
                                     }
-                                    reject();
+                                    reject(err);
                                 });
                         });
 
@@ -200,15 +204,18 @@
                 else {
                     var url = "/_api/contextinfo?_=" + (new Date()).getTime();
                     var headers = {
-                        "accept": "application/json;odata=verbose"
+                        "accept": "application/json;odata=verbose",
+                        "Content-Type": "application/json;odata=verbose",
                     };
-
                     self.__httpPost(url, null, headers)
                         .then(function (data) {
                             self.__digest = data.d.GetContextWebInformation;
                             self.__digest.Date = new Date(new Date().getTime() + self.__digest.FormDigestTimeoutSeconds * 1000);
                             resolve(self.__digest);
-                        }, function (err) {                           
+                        }, function (err) {
+                            if (window.console && console.log) {
+                                console.log(err);
+                            }
                             reject(err);
                         });
                 }
